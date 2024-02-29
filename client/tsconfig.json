@@ -1,0 +1,43 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "allowJs": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "lib": ["esnext", "dom"],
+        "baseUrl": "./",
+        "skipLibCheck": true,
+        "paths": {
+            "@assets/*": ["src/assets/*"],
+            "@components/*": ["src/components/*"],
+            "@composables/*": ["src/composables/*"],
+            "@server/*": ["../server/src/*"]
+        },
+        "types": [
+            "vitest/globals",
+            "vite-plugin-vue-layouts/client",
+            "vite-plugin-pages/client",
+            "./jsfxr.d.ts",
+            "jsfxr"
+        ]
+    },
+    "include": [
+        "src/*.ts",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "components.d.ts",
+        "jsfxr.d.ts"
+    ],
+    "exclude": ["node_modules"]
+}

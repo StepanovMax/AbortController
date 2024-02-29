@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+    @apply bg-sky-800 border text-white rounded px-3 py-1;
+}
+
+input {
+    @apply border rounded p-1 bg-slate-50;
+}
+
+table td,
+table th {
+    @apply border px-2 py-1;
+}
