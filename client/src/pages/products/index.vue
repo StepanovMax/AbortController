@@ -39,8 +39,6 @@ const { Api } = useApi();
 
 const filter = reactive<ItemsFilter>({
     searchString: '',
-    priceMin: undefined,
-    priceMax: undefined,
     offset: 0,
 });
 

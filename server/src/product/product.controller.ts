@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+    Controller,
+    DefaultValuePipe,
+    Get,
+    Param,
+    ParseFloatPipe,
+    ParseIntPipe,
+    Query,
+} from '@nestjs/common';
 import { ItemsFilter, ProductService } from './product.service';
 import { Product } from './products.database';
 
@@ -15,10 +23,14 @@ export class ProductController {
     constructor(private productService: ProductService) {}
 
     @Get('/')
-    async getList(@Query('filter') filter?: ItemsFilter): Promise<ItemsList> {
-        const items = await this.productService.getList(filter);
+    async getList(
+        @Query('searchString') searchString?: string,
+        @Query('offset', ParseIntPipe) offset: number = 0,
+    ): Promise<ItemsList> {
+        console.log({ searchString, offset });
+
+        const items = await this.productService.getList();
         const total = items.length;
-        const offset = filter?.offset || 0;
         const limit = 10;
 
         return {

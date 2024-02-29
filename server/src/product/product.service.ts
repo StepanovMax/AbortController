@@ -3,8 +3,6 @@ import { productsDatabase, Product } from './products.database';
 
 export interface ItemsFilter {
     searchString?: string;
-    priceMin?: number;
-    priceMax?: number;
     offset?: number;
 }
 

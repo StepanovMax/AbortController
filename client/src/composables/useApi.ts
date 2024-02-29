@@ -14,7 +14,7 @@ const getItem = (itemId: string) => {
 const getList = (filter?: ItemsFilter): Promise<ItemsList> => {
     return instance
         .get<ReturnType<ProductController['getList']>>(`/product`, {
-            params: { filter },
+            params: filter,
         })
         .then(response => response.data);
 };
