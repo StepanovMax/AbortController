@@ -16,9 +16,9 @@
         </table>
 
         <div class="flex flex-row space-x-4 items-center">
-            <button @click="prevPage">Назад</button>
-            <div @click="askPage">{{ page }}</div>
-            <button @click="prevPage">Вперед</button>
+            <button @click="() => page--">Назад</button>
+            <div @click="askPage">{{ page }} / {{ total }}</div>
+            <button @click="() => page++">Вперед</button>
         </div>
     </div>
 </template>
@@ -28,6 +28,7 @@ import { ref, PropType, watch, reactive } from 'vue';
 import useApi from '@composables/useApi';
 import { computedAsync } from '@vueuse/core';
 import { ItemsFilter } from '@server/product/product.service';
+import { Product } from '@server/product/products.database';
 
 const { Api } = useApi();
 
@@ -38,9 +39,16 @@ const filter = reactive<ItemsFilter>({
     offset: 0,
 });
 
-const products = computedAsync(() => Api.Product.getList(filter.value));
+const products = ref<Product[]>([]);
 
-const page = ref(1);
+computedAsync(() =>
+    Api.Product.getList(filter).then(data => {
+        products.value = data.items;
+        total.value = data.total;
+    }),
+);
 
 //!todo pagination
+const page = ref(1);
+const total = ref(0);
 </script>

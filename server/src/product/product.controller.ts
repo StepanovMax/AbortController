@@ -5,6 +5,8 @@ import { Product } from './products.database';
 //!todo generic
 export interface ItemsList {
     total: number;
+    limit: number;
+    offset: number;
     items: Product[];
 }
 
@@ -21,6 +23,8 @@ export class ProductController {
 
         return {
             total,
+            limit,
+            offset,
             items: items.slice(offset, limit),
         };
     }

@@ -1,5 +1,7 @@
 <template>
-    <div>{{ product.name }}</div>
+    <div>
+        <pre>{{ product }}</pre>
+    </div>
 </template>
 
 <script setup lang="ts">
