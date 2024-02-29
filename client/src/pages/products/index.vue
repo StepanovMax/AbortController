@@ -1,6 +1,11 @@
 <template>
     <div class="p-4 flex flex-col space-y-4">
-        <input type="text" v-model="filter.searchString" class="border" />
+        <input
+            type="text"
+            v-model="filter.searchString"
+            class="border"
+            placeholder="Поиск по товарам"
+        />
 
         <table>
             <tbody>
