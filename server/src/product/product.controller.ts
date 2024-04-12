@@ -24,20 +24,22 @@ export class ProductController {
 
     @Get('/')
     async getList(
-        @Query('searchString') searchString?: string,
         @Query('offset', ParseIntPipe) offset: number = 0,
+        @Query('searchString') searchString?: string,
     ): Promise<ItemsList> {
-        console.log({ searchString, offset });
 
-        const items = await this.productService.getList();
-        const total = items.length;
         const limit = 10;
+
+        const { items, total } = await this.productService.getList({
+            searchString,
+            offset,
+        });
 
         return {
             total,
             limit,
             offset,
-            items: items.slice(offset, limit),
+            items,
         };
     }
 
