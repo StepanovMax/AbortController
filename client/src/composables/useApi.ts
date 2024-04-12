@@ -20,10 +20,11 @@ const getItem = (itemId: string): Promise<Product> => {
         });
 };
 
-const getList = (filter?: ItemsFilter): Promise<ItemsList> => {
+const getList = (filter?: ItemsFilter, signal?: GenericAbortSignal | undefined): Promise<ItemsList> => {
     return instance
         .get<ReturnType<ProductController['getList']>>(`/product`, {
             params: filter,
+            signal: signal,
         })
         .then(response => response.data);
 };

@@ -47,6 +47,7 @@ const filter = reactive<ItemsFilter>({
 });
 
 
+let controller: any = null;
 const totalPages = ref(0);
 const products = ref<Product[]>([]);
 
@@ -65,11 +66,16 @@ watchEffect(() => {
 watchDebounced(
     filter,
     () => {
-        Api.Product.getList(filter)
-            .then(data => {
-                products.value = data.items;
-                total.value = data.total;
-            });
+        controller?.abort();
+        controller = new AbortController();
+
+        if (controller) {
+            Api.Product.getList(filter, controller.signal)
+                .then(data => {
+                    products.value = data.items;
+                    total.value = data.total;
+                });
+        }
     },
     {
         debounce: 100,
